@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:text2image/constants/common_colors.dart';
 
 circularProgress() {
   return Container(
@@ -15,18 +16,31 @@ circularProgress() {
 myCircularProgress(
     {double size = 20,
     Color color = Colors.lightBlueAccent,
-    double width = 2.0}) {
+    double width = 2.0,
+    String title = ""}) {
   return Container(
-    alignment: Alignment.bottomCenter,
-    child: SizedBox(
-      height: size,
-      width: size,
-      child: CircularProgressIndicator(
-        strokeWidth: width,
-        valueColor: AlwaysStoppedAnimation(
-          color,
+    width: 100,
+    height: 100,
+    color: whiteColor.withOpacity(.8),
+    child: Column(
+      children: [
+        SizedBox(
+          height: size,
+          width: size,
+          child: CircularProgressIndicator(
+            strokeWidth: width,
+            valueColor: AlwaysStoppedAnimation(
+              color,
+            ),
+          ),
         ),
-      ),
+        Text(
+          title,
+          style: TextStyle(
+            color: color,
+          ),
+        )
+      ],
     ),
   );
 }

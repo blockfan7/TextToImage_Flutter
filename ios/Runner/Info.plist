@@ -41,5 +41,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>just want to store jpg to gallery</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>just want to store jpg to gallery</string>
 </dict>
 </plist>

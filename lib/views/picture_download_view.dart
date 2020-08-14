@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:stacked/stacked.dart';
 import 'package:text2image/constants/common_colors.dart';
+import 'package:text2image/services/navigation_service.dart';
 import 'package:text2image/view_models/picture_download_view_model.dart';
+import 'package:text2image/views/overview_widget.dart';
 import 'package:text2image/widgets/progress_widget.dart';
 
 class PictureDownloadView extends StatelessWidget {
@@ -34,28 +36,26 @@ class PictureDownloadView extends StatelessWidget {
 
   buildBody(BuildContext context, PictureDownloadViewModel model) {
     double height = MediaQuery.of(context).size.height;
-    return SingleChildScrollView(
-      child: Container(
-        child: Column(
-          children: [
-            Container(
-              height: height / 10 * 2,
-              child: buildLogo(context, model),
-            ),
-            Container(
-              height: height / 10 * 5,
-              child: buildWordContainer(context, model),
-            ),
-            Container(
-              height: height / 10 * 1,
-              child: buildColorPicker(context, model),
-            ),
-            Container(
-              height: height / 10 * 2,
-              child: buildBottom(context, model),
-            )
-          ],
-        ),
+    return Container(
+      child: Column(
+        children: [
+          Container(
+            height: height / 10 * 2,
+            child: buildLogo(context, model),
+          ),
+          Container(
+            height: height / 10 * 5,
+            child: buildWordContainer(context, model),
+          ),
+          Container(
+            height: height / 10 * 1,
+            child: buildColorPicker(context, model),
+          ),
+          Container(
+            height: height / 10 * 2,
+            child: buildBottom(context, model),
+          )
+        ],
       ),
     );
   }
@@ -74,10 +74,10 @@ class PictureDownloadView extends StatelessWidget {
   }
 
   buildWordContainer(BuildContext context, PictureDownloadViewModel model) {
-    return RepaintBoundary(
-      key: boundaryKey,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 30),
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 30),
+      child: RepaintBoundary(
+        key: boundaryKey,
         child: Container(
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
@@ -93,9 +93,12 @@ class PictureDownloadView extends StatelessWidget {
             //   )
             // ],
           ),
-          child: Text(
-            text,
-            style: TextStyle(color: blackColor, fontSize: 20),
+          child: SingleChildScrollView(
+            child: Text(
+              text,
+              style: TextStyle(color: blackColor, fontSize: 20),
+              maxLines: 1000,
+            ),
           ),
         ),
       ),
@@ -107,10 +110,10 @@ class PictureDownloadView extends StatelessWidget {
       0xFFFFFFFF,
       0xFFFFF79A,
       0xFF82CA9C,
-      0xFF7E00FF,
-      0xFFFF0000,
-      0xFF00FF00,
-      0xFF0000FF,
+      0xFFB39DDB,
+      0xFFF9A825,
+      0xFFB0BEC5,
+      0xFFBCAAA4,
     ];
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
@@ -164,7 +167,17 @@ class PictureDownloadView extends StatelessWidget {
         onPressed: model.busy == true
             ? null
             : () {
-                model.exportToimage(boundaryKey);
+                // model.exportToimage(boundaryKey);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return OverViewWidget(
+                        backColor: model.backgroundColor,
+                        text: text,
+                      );
+                    },
+                  ),
+                );
               },
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
