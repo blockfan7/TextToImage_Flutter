@@ -21,7 +21,7 @@ class OverViewWidget extends StatelessWidget {
 
   buildWidget(BuildContext context, OverviewWidgetModel model, Widget child) {
     return Scaffold(
-      backgroundColor: transparentColor,
+      backgroundColor: whiteColor,
       body: SafeArea(
         child: Center(
           child: RepaintBoundary(
@@ -36,6 +36,9 @@ class OverViewWidget extends StatelessWidget {
               child: AutoSizeText(
                 text,
                 style: TextStyle(color: blackColor, fontSize: 20),
+                minFontSize: 1,
+                maxLines: 5000,
+                overflow: TextOverflow.ellipsis,
                 // maxLines: 1000,
               ),
             ),
