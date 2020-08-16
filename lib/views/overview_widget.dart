@@ -37,8 +37,6 @@ class OverViewWidget extends StatelessWidget {
                 text,
                 style: TextStyle(color: blackColor, fontSize: 20),
                 minFontSize: 1,
-                maxLines: 5000,
-                overflow: TextOverflow.ellipsis,
                 // maxLines: 1000,
               ),
             ),
